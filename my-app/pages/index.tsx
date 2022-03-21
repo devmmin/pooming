@@ -1,16 +1,23 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.scss'
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
+import { Drawer, Box, Tab, Tabs, List, ListItem, ListItemButton, ListItemText, Divider } from '@mui/material';
 import { useState } from 'react';
+import { Menu, Search } from '@material-ui/icons';
 
 const Home: NextPage = () => {
   const [value, setValue] = useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
+  };
+
+  const [openDrawer, setState] = useState(false);
+  const toggleDrawer = (open: boolean) => (event: any) => {
+    if (event.type !== 'click') {
+      return;
+    }
+    setState(open);
   };
 
   return (
@@ -23,7 +30,35 @@ const Home: NextPage = () => {
       </Head>
 
       <header className={styles.header}>
+        <Menu onClick={toggleDrawer(true)}/>
+        <Drawer
+          anchor={'left'}
+          open={openDrawer}
+          onClose={toggleDrawer(false)}
+        >
+          <Box sx={{ width: '100%', maxWidth: 300, bgcolor: 'background.paper' }}>
+            <List disablePadding>
+              <ListItem>
+                푸밍이 뭐예요?
+              </ListItem>
+              <Divider/>
+              <ListItem>
+                할 말 있어요
+              </ListItem>
+              <Divider/>
+              <ListItem>
+                심테공방
+              </ListItem>
+              <Divider/>
+              <ListItem>
+                기업 유저이신가요?
+              </ListItem>
+              <Divider/>
+            </List>
+          </Box>
+        </Drawer>
         POOMING
+        <Search/>
       </header>
       <main className={styles.main}>
        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
