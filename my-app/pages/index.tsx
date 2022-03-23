@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.scss'
-import { Drawer, Box, Tab, Tabs, List, ListItem, ListItemButton, ListItemText, Divider } from '@mui/material';
+import { Drawer, Box, Tab, Tabs, List, ListItem, Divider, Card, CardContent, Typography, CardHeader } from '@mui/material';
 import { useState } from 'react';
 import { Menu, Search } from '@material-ui/icons';
 
@@ -30,7 +30,7 @@ const Home: NextPage = () => {
       </Head>
 
       <header className={styles.header}>
-        <Menu onClick={toggleDrawer(true)}/>
+        <Menu onClick={toggleDrawer(true)} style={{ fontSize: 30 }}/>
         <Drawer
           anchor={'left'}
           open={openDrawer}
@@ -58,15 +58,30 @@ const Home: NextPage = () => {
           </Box>
         </Drawer>
         POOMING
-        <Search/>
+        <Search style={{ fontSize: 30 }}/>
       </header>
       <main className={styles.main}>
        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} variant="fullWidth">
-          <Tab label="홈"/>
-          <Tab label="나의 우주"/>
+          <Tab label="홈" sx={{ fontSize: '20px' }}/>
+          <Tab label="나의 우주" sx={{ fontSize: '20px' }}/>
         </Tabs>
-       </Box>
+      </Box>
+      <Box sx={{ backgroundColor: '#1a164b'}}>
+        <h1 style={{ padding: '20px 15px 0', margin: 0 }}>금주의 HOT한 테스트</h1>
+        <Box sx={{ display: 'flex', paddingBottom: '30px' }}>
+          {['모의고사 궁합', '나의 민낯', 'mbti'].map((name, index) => {
+            return (
+              <Card sx={{ width: 162, height: 225, margin: '8px 0 0 16px' }}>
+                <CardHeader title={index + 1}></CardHeader>
+                <CardContent>
+                  <Typography sx={{ fontWeight: 'bold' }}>{name} 테스트</Typography>
+                </CardContent>
+              </Card>
+            )
+          })}
+        </Box>
+      </Box>
       </main>
 
       <footer className={styles.footer}>
